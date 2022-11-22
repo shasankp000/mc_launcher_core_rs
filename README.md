@@ -7,6 +7,10 @@ Since this library uses https://github.com/shasankp000/mcdl_core_rs/ as an under
 
 However support will be extended to Linux and MacOS soon.
 
+# Note 
+
+To launch mc, you need to have an account at www.ely.by since the launcher lib supports user authentication from www.ely.by only as of the moment
+
 # Functions 
 
 # download_runtime
