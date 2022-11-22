@@ -18,7 +18,7 @@ As of the moment only windows is supported. I will extend this to linux soon.
 
 ```download_runtime()```
 
-# is_java_installed
+## is_java_installed
 
 Checks whether java is installed on the system or not
 
@@ -30,7 +30,7 @@ Checks only for windows at the moment
 
 ``` println!("{}", is_java_installed)``` (true/false)
 
-# get_total_sys_mem
+## get_total_sys_mem
 
 Gets the total system memory in a string.
 
@@ -53,7 +53,7 @@ Alternatively the init() function can also be called at first time run only.
 
 If refresh_data is set to true, the settings.json file will be overriden with default values everytime
 
-# ely_by_authenticator
+## ely_by_authenticator
 
 Does user authentication at www.ely.by and saves the data to settings.json
 
@@ -61,7 +61,7 @@ Does user authentication at www.ely.by and saves the data to settings.json
 
 ```ely_by_authenticator("your username at ely.by", "your password at ely.by", "minecraft_installation_directory")```
 
-# download_ely_authlib
+## download_ely_authlib
 
 Downloads the ely_by authlib
 
@@ -69,11 +69,12 @@ Downloads the ely_by authlib
 
 ``` download_ely_authlib("minecraft installation directory")```
 
-## launch_mc_vanilla
+# launch_mc_vanilla
 
 Launches minecraft for the specified game_version, it's type(release or snapshot) and the authentication type used.
 
 Supports www.ely.by authentication for now
+
 Supports only Windows at the moment. I will soon extend this to Linux and MacOS as well.
 
 ```use minecraft_launcher_core::launcher_cli::launch_mc_vanilla;```
