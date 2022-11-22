@@ -1,6 +1,8 @@
 # mc_launcher_core_rs
 A minecraft launcher library written in rust
 
+https://crates.io/crates/minecraft_launcher_core
+
 # Platforms supported 
 
 Since this library uses https://github.com/shasankp000/mcdl_core_rs/ as an underlying dependency, which only supports windows at the moment, this library(all functions in this library) support only windows at the moment as well.
