@@ -2,6 +2,15 @@
 name = "minecraft_launcher_core"
 version = "0.1.0"
 edition = "2021"
+authors = ["shasankp000 <shasankp.14@gmail.com>"]
+description = "A Minecraft launcher library written in rust"
+rust-version = "1.65"
+readme = "README.md"
+license = "BSD-2-Clause"
+keywords = ["minecraft", "minecraft_downloader", "minecraft_launcher"]
+categories = ["algorithms"]
+homepage = "https://github.com/shasankp000/mc_launcher_core_rs"
+documentation = "https://github.com/shasankp000/mc_launcher_core_rs#readme"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
