@@ -73,6 +73,8 @@ Downloads the ely_by authlib
 
 Launches minecraft for the specified game_version, it's type(release or snapshot) and the authentication type used.
 
+This function has only been tested with "release" versions of minecraft. Snapshot support will be added in the next release in both the underlying dependency and this library.
+
 Supports www.ely.by authentication for now
 
 Supports only Windows at the moment. I will soon extend this to Linux and MacOS as well.
