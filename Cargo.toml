@@ -1,6 +1,6 @@
 [package]
 name = "minecraft_launcher_core"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 authors = ["shasankp000 <shasankp.14@gmail.com>"]
 description = "A Minecraft launcher library written in rust"
@@ -11,6 +11,8 @@ keywords = ["minecraft", "minecraft_downloader", "minecraft_launcher"]
 categories = ["algorithms"]
 homepage = "https://github.com/shasankp000/mc_launcher_core_rs"
 documentation = "https://github.com/shasankp000/mc_launcher_core_rs#readme"
+
+
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
@@ -24,6 +26,7 @@ serde_derive = "1.0"
 jsonxf = "1.1.1"
 sys-info = "0.9.1"
 whoami = "1.2.3"
+
 [dependencies.uuid]
 version = "1.2.1"
 features = [

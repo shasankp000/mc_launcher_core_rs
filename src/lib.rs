@@ -9,7 +9,6 @@
  extern crate serde_derive;
 
 
-
 pub mod main {
 
     pub mod runtime_downloader {
@@ -19,11 +18,13 @@ pub mod main {
         use std::process;
         use whoami::username;
 
+
         use crate::main::launcher_cli::is_java_installed;
 
-
+        
         /// Downloads the latest jdk runtime for minecraft (currently it is JDK 17)
         ///  As of the moment only windows is supported. I will extend this to linux soon.
+
         pub fn download_runtime() -> Result<(), std::io::Error>{
 
             let sys_username = username();
@@ -161,11 +162,25 @@ pub mod main {
     pub fn get_total_sys_mem() -> String {
             let total_memory = sys_info::mem_info().unwrap().total;
 
+            // println!("{total_memory}");
+
             let human_readable = (total_memory as f32)/(1e6);
 
-            let string_total_memory = human_readable.to_string()[0..1].to_string();
+            // println!("{human_readable}");
 
-            string_total_memory
+            if human_readable > 10.0 {
+
+                let string_total_memory = human_readable.to_string()[0..2].to_string();
+
+                string_total_memory
+            }
+
+            else {
+                let string_total_memory = human_readable.to_string()[0..1].to_string();
+
+                string_total_memory
+            }
+            
         }
 
     /// Basic initialization work. All mc launcher related functions should call init() first.

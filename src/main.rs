@@ -37,5 +37,10 @@ fn main() {
 //    println!("{}", format!("msiexec /i {file_name}.{file_ext}"))
 
     //ely_by_authenticator("some_username", "password");
+
+
+    // let sys_mem = main::launcher_cli::get_total_sys_mem();
+
+    // println!("Total memory: {sys_mem}")
 }
 
