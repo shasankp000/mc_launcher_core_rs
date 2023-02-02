@@ -1,6 +1,6 @@
 [package]
 name = "minecraft_launcher_core"
-version = "0.1.1"
+version = "0.1.2"
 edition = "2021"
 authors = ["shasankp000 <shasankp.14@gmail.com>"]
 description = "A Minecraft launcher library written in rust"
@@ -17,8 +17,8 @@ documentation = "https://github.com/shasankp000/mc_launcher_core_rs#readme"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-requests_rs = "0.1.5"
-minecraft_downloader_core = "0.1.4"
+requests_rs = "0.1.6"
+minecraft_downloader_core = "0.1.6"
 colored = "2.0.0"
 serde = "1.0"
 serde_json = "1.0"
