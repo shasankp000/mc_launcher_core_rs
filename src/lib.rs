@@ -512,7 +512,7 @@ pub mod main {
 
                 ely_by_authenticator(username, password, install_dir);
 
-                extract_natives(game_version, install_dir, &format!("{install_dir}\\.minecraft\\versions\\{game_version}\\"), "windows");
+                extract_natives(game_version, install_dir,  "windows");
 
                 let settings_data = fs::read_to_string(format!("{install_dir}\\settings.json")).expect("Error reading from file");
 
