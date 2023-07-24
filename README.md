@@ -87,6 +87,7 @@ Supports www.ely.by authentication for now
 Supports only Windows at the moment. I will soon extend this to Linux and MacOS as well.
 
 You can ignore the "password" and "username" if you are using msa authentication.
+
 You can ignore the "token" if you are using ely.by authentication.
 
 `use minecraft_launcher_core::launcher_cli::launch_mc_vanilla;`
