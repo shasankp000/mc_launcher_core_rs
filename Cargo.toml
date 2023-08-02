@@ -1,5 +1,5 @@
 [package]
-name = "minecraft_launcher_core"
+name = "minecraft_launcher_core_msa"
 version = "0.1.0"
 edition = "2021"
 authors = ["aapelix <hello@aapelix.dev>"]
