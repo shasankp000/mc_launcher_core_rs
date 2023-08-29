@@ -1,16 +1,16 @@
 [package]
-name = "minecraft_launcher_core"
-version = "0.1.2"
+name = "minecraft_launcher_core_msa"
+version = "0.1.0"
 edition = "2021"
-authors = ["shasankp000 <shasankp.14@gmail.com>"]
+authors = ["aapelix <hello@aapelix.dev>"]
 description = "A Minecraft launcher library written in rust"
 rust-version = "1.65"
 readme = "README.md"
 license = "BSD-2-Clause"
 keywords = ["minecraft", "minecraft_downloader", "minecraft_launcher"]
 categories = ["algorithms"]
-homepage = "https://github.com/shasankp000/mc_launcher_core_rs"
-documentation = "https://github.com/shasankp000/mc_launcher_core_rs#readme"
+homepage = "https://github.com/aapelix/mc_launcher_core_rs"
+documentation = "https://github.com/aapelix/mc_launcher_core_rs#readme"
 
 
 

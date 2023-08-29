@@ -493,19 +493,22 @@ pub mod main {
 
         /// Launches minecraft for the specified game_version, it's type(release or snapshot) and the authentication type used.
         /// 
-        /// Supports www.ely.by authentication for now
+        /// Supports www.ely.by and msa authentication for now
         /// 
         /// Supports only Windows at the moment. I will soon extend this to linux as well.
+        /// 
+        /// You can ignore the "password" and "username" if you are using msa authentication.
+        /// You can ignore the "token" if you are using ely.by authentication.
         /// 
         /// ```
         /// use minecraft_launcher_core::launcher_cli::launch_mc_vanilla;
         /// 
-        /// launch_mc_vanilla(auth_type:"ely_by", game_version:"1.19.2", r#type: "release/snapshot", username: "your username on ely.by", password: "your password on ely.by", alloc_mem: "2")
+        /// launch_mc_vanilla(auth_type:"ely_by/msa", game_version:"1.19.2", r#type: "release/snapshot", username: "your username on ely.by", password: "your password on ely.by", token: "The Mojang Access Token or the final token in the Microsoft authentication scheme " alloc_mem: "2")
         /// 
         /// ```
         /// alloc_mem is the amount of memory you want to allocate to minecraft (It takes whole numbers for GB only)
         /// 
-        pub fn launch_mc_vanilla(auth_type: &str, game_version: &str, r#type: &str, install_dir: &str, username: &str, password: &str, alloc_mem: &str) {
+        pub fn launch_mc_vanilla(auth_type: &str, game_version: &str, r#type: &str, install_dir: &str, username: &str, password: &str, token: &str, alloc_mem: &str) {
             if auth_type == "ely_by".trim() && cfg!(target_os="windows") {
 
                 download_ely_authlib(install_dir);
@@ -590,6 +593,77 @@ pub mod main {
                 .args(cmd_arr)
                 .spawn().expect("failed to spawn process").wait().expect("Failed to wait for command");
 
+            }
+            if auth_type == "windows".trim() && cfg!(target_os="windows") {
+                extract_natives(game_version, install_dir,  "windows");
+
+                let settings_data = fs::read_to_string(format!("{install_dir}\\settings.json")).expect("Error reading from file");
+
+                let mut settings: Settings = serde_json::from_str(&settings_data).expect("Error reading json data!");
+
+                let jvm_args_list = vec![format!("-Xmx{alloc_mem}G"), format!("-Xms128m"), "-XX:HeapDumpPath=MojangTricksIntelDriversForPerformance_javaw.exe_minecraft.exe.heapdump".to_string() ];
+
+                settings.jvm_args.args.clear();
+
+                for arg in jvm_args_list.iter() {
+                    settings.jvm_args.args.push(Some(arg.clone()))
+                }
+
+                let settings_str = serde_json::to_string(&settings).unwrap();
+
+                let settings_str_pretty = jsonxf::pretty_print(&settings_str).unwrap();
+
+                update_settings(&settings_str_pretty, install_dir);
+
+                let launch_options = LaunchOptions {
+                    username: settings.user_info[0].username.as_ref().unwrap().clone(), //as_ref() takes a reference to the contents of the vector,clone() gets the original value
+                    uuid: settings.user_info[0].uuid.as_ref().unwrap().clone(),
+                    token: format!("{}", token)
+                };
+                    
+
+                let mut classpath = minecraft_downloader_core::main::game_downloader::get_class_path(install_dir, game_version);
+
+                classpath+=&format!("{}\\.minecraft\\versions\\{}\\{}.jar", install_dir, game_version, game_version);
+
+                let main_class = get_main_class(game_version, install_dir);
+
+                let cmd_arr = [
+                    "/C",
+                    "java", 
+                    &jvm_args_list[0], 
+                    &jvm_args_list[1], 
+                    &jvm_args_list[2], 
+                    "-Dos.name=Windows 10",
+                    "-Dos.version=10.0", 
+                    &format!("-Djava.library.path={install_dir}\\.minecraft\\versions\\{game_version}\\natives"), 
+                    "-Dminecraft.launcher.brand=minecraft-launcher-core", 
+                    "-Dminecraft.launcher.version=0.1.0", 
+                    "-cp",
+                    &format!("{}", classpath),
+                    &format!("{}", main_class), 
+                    "--version",
+                    &format!("{}", game_version), 
+                    "--gameDir",
+                    &format!("{}\\.minecraft", install_dir), 
+                    "--assetsDir",
+                    &format!("{}\\.minecraft\\assets", install_dir), 
+                    "--assetIndex",
+                    &format!("{}", &game_version[0..4]),
+                    "--uuid",
+                    &format!("{}", launch_options.uuid), 
+                    "--accessToken",
+                    &format!("{}", launch_options.token), 
+                    "--clientId",
+                    &format!("{}", &settings.client_token.unwrap()),
+                    "--versionType",
+                    &format!("{}", r#type)];
+
+                println!("Launching minecraft version {}", game_version);
+
+                process::Command::new("cmd")
+                .args(cmd_arr)
+                .spawn().expect("failed to spawn process").wait().expect("Failed to wait for command");
             }
         }
 
